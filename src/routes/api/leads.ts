@@ -1,0 +1,13 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { leadSchema,normalizeIndianPhone } from "@/lib/lead-schema";
+const attempts=new Map<string,{count:number;reset:number}>();
+export const Route=createFileRoute("/api/leads")({server:{handlers:{POST:async({request})=>{
+  const ip=request.headers.get("cf-connecting-ip")||request.headers.get("x-forwarded-for")?.split(",")[0]||"unknown"; const now=Date.now(); const entry=attempts.get(ip); if(entry&&entry.reset>now&&entry.count>=8)return Response.json({error:"Too many applications. Please try again shortly."},{status:429}); attempts.set(ip,{count:entry&&entry.reset>now?entry.count+1:1,reset:entry&&entry.reset>now?entry.reset:now+60000});
+  const parsed=leadSchema.safeParse(await request.json().catch(()=>null)); if(!parsed.success)return Response.json({error:parsed.error.issues[0]?.message||"Invalid application"},{status:400});
+  const input=parsed.data; const normalizedMobile=normalizeIndianPhone(input.mobile); const {supabaseAdmin}=await import("@/integrations/supabase/client.server");
+  const cutoff=new Date(Date.now()-24*60*60*1000).toISOString(); const {data:existing}=await supabaseAdmin.from("leads").select("id").eq("normalized_mobile",normalizedMobile).gte("created_at",cutoff).maybeSingle(); if(existing)return Response.json({ok:true,duplicate:true},{status:200});
+  const {data:lead,error}=await supabaseAdmin.from("leads").insert({full_name:input.full_name,mobile:input.mobile,whatsapp_number:input.whatsapp_number,email:input.email||null,city:input.city,profession:input.profession,experience:input.experience,career_interest:input.career_interest,source:input.source,normalized_mobile:normalizedMobile,normalized_email:input.email?input.email.toLowerCase():null}).select("id").single(); if(error||!lead){console.error("Lead insert failed",error);return Response.json({error:"We could not submit your application. Please try again."},{status:500});}
+  const tracking={lead_id:lead.id,utm_source:input.utm_source||null,utm_medium:input.utm_medium||null,utm_campaign:input.utm_campaign||null,utm_content:input.utm_content||null,utm_term:input.utm_term||null,fbclid:input.fbclid||null,gclid:input.gclid||null,landing_page:input.landing_page||null,referrer:input.referrer||null,meta_event_id:input.meta_event_id||null};
+  await Promise.all([supabaseAdmin.from("applications").insert({lead_id:lead.id,submitted_payload:input}),supabaseAdmin.from("campaign_tracking").insert(tracking),supabaseAdmin.from("lead_status_history").insert({lead_id:lead.id,to_status:"NEW_LEAD"})]);
+  return Response.json({ok:true,id:lead.id},{status:201});
+}}}});
