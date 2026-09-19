@@ -3,8 +3,8 @@ import { useEffect, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowRight, Check, ChevronDown, MessageCircle, Phone, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COURSE_CONFIG } from "@/lib/course-config";
-import { leadSchema, type LeadInput } from "@/lib/lead-schema";
-import { trackMeta } from "@/lib/meta";
+import { leadSchema } from "@/lib/lead-schema";
+import { initializeMetaPixel, trackMeta } from "@/lib/meta";
 import heroImage from "@/assets/nail-course-hero.jpg";
 import trainingImage from "@/assets/nail-training.jpg";
 import toolsImage from "@/assets/nail-tools.jpg";
@@ -43,9 +43,17 @@ export const Route = createFileRoute("/")({
 });
 
 function LandingPage() {
-  useEffect(() => trackMeta("PageView"), []);
+  useEffect(() => { initializeMetaPixel(); trackMeta("PageView"); trackMeta("ViewContent"); }, []);
   const scrollToForm = () => document.querySelector("#apply")?.scrollIntoView({ behavior: "smooth" });
   return <main className="overflow-hidden bg-background pb-20 md:pb-0">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        { "@type": "Organization", name: COURSE_CONFIG.brand, url: COURSE_CONFIG.canonicalUrl, telephone: COURSE_CONFIG.phoneDisplay },
+        { "@type": "Course", name: COURSE_CONFIG.name, description: "Professional nail training with entrepreneurship and digital operations.", provider: { "@type": "Organization", name: COURSE_CONFIG.brand }, offers: { "@type": "Offer", price: COURSE_CONFIG.price, priceCurrency: "INR" } },
+        { "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
+      ],
+    }).replace(/</g, "\\u003c") }} />
     <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-5 py-5 md:px-10">
       <div className="flex items-center gap-4"><img src={mmaLogo.url} alt="MakeMeArtist" className="h-7 w-auto md:h-9" /><span className="h-6 w-px bg-foreground/20"/><img src={xNailLogo.url} alt="XNAIL Bar" className="h-10 w-auto md:h-12" /></div>
       <Button variant="dark" onClick={scrollToForm} className="hidden sm:inline-flex">Apply now <ArrowRight size={16}/></Button>
