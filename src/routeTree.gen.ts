@@ -10,33 +10,114 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as ApiLeadsRouteImport } from './routes/api/leads'
+import { Route as ApiAdminDashboardRouteImport } from './routes/api/admin/dashboard'
+import { Route as ApiAdminLeadsRouteImport } from './routes/api/admin/leads'
+import { Route as ApiAdminLeadsIdRouteImport } from './routes/api/admin/leads.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHealthRoute = ApiHealthRouteImport.update({
+  id: '/api/health',
+  path: '/api/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiLeadsRoute = ApiLeadsRouteImport.update({
+  id: '/api/leads',
+  path: '/api/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminDashboardRoute = ApiAdminDashboardRouteImport.update({
+  id: '/api/admin/dashboard',
+  path: '/api/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLeadsRoute = ApiAdminLeadsRouteImport.update({
+  id: '/api/admin/leads',
+  path: '/api/admin/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLeadsIdRoute = ApiAdminLeadsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiAdminLeadsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/leads': typeof ApiLeadsRoute
+  '/api/admin/dashboard': typeof ApiAdminDashboardRoute
+  '/api/admin/leads': typeof ApiAdminLeadsRouteWithChildren
+  '/api/admin/leads/$id': typeof ApiAdminLeadsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/leads': typeof ApiLeadsRoute
+  '/api/admin/dashboard': typeof ApiAdminDashboardRoute
+  '/api/admin/leads': typeof ApiAdminLeadsRouteWithChildren
+  '/api/admin/leads/$id': typeof ApiAdminLeadsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/leads': typeof ApiLeadsRoute
+  '/api/admin/dashboard': typeof ApiAdminDashboardRoute
+  '/api/admin/leads': typeof ApiAdminLeadsRouteWithChildren
+  '/api/admin/leads/$id': typeof ApiAdminLeadsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/api/health'
+    | '/api/leads'
+    | '/api/admin/dashboard'
+    | '/api/admin/leads'
+    | '/api/admin/leads/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/api/health'
+    | '/api/leads'
+    | '/api/admin/dashboard'
+    | '/api/admin/leads'
+    | '/api/admin/leads/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/api/health'
+    | '/api/leads'
+    | '/api/admin/dashboard'
+    | '/api/admin/leads'
+    | '/api/admin/leads/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  ApiHealthRoute: typeof ApiHealthRoute
+  ApiLeadsRoute: typeof ApiLeadsRoute
+  ApiAdminDashboardRoute: typeof ApiAdminDashboardRoute
+  ApiAdminLeadsRoute: typeof ApiAdminLeadsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +129,70 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/health': {
+      id: '/api/health'
+      path: '/api/health'
+      fullPath: '/api/health'
+      preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/leads': {
+      id: '/api/leads'
+      path: '/api/leads'
+      fullPath: '/api/leads'
+      preLoaderRoute: typeof ApiLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/dashboard': {
+      id: '/api/admin/dashboard'
+      path: '/api/admin/dashboard'
+      fullPath: '/api/admin/dashboard'
+      preLoaderRoute: typeof ApiAdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/leads': {
+      id: '/api/admin/leads'
+      path: '/api/admin/leads'
+      fullPath: '/api/admin/leads'
+      preLoaderRoute: typeof ApiAdminLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/leads/$id': {
+      id: '/api/admin/leads/$id'
+      path: '/$id'
+      fullPath: '/api/admin/leads/$id'
+      preLoaderRoute: typeof ApiAdminLeadsIdRouteImport
+      parentRoute: typeof ApiAdminLeadsRoute
+    }
   }
 }
 
+interface ApiAdminLeadsRouteChildren {
+  ApiAdminLeadsIdRoute: typeof ApiAdminLeadsIdRoute
+}
+
+const ApiAdminLeadsRouteChildren: ApiAdminLeadsRouteChildren = {
+  ApiAdminLeadsIdRoute: ApiAdminLeadsIdRoute,
+}
+
+const ApiAdminLeadsRouteWithChildren = ApiAdminLeadsRoute._addFileChildren(
+  ApiAdminLeadsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  ApiHealthRoute: ApiHealthRoute,
+  ApiLeadsRoute: ApiLeadsRoute,
+  ApiAdminDashboardRoute: ApiAdminDashboardRoute,
+  ApiAdminLeadsRoute: ApiAdminLeadsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
