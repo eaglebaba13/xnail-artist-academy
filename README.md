@@ -1,29 +1,13 @@
-# Welcome to your Lovable project
+# MakeMeArtist × XNAIL course platform
 
-This project was built with [Lovable](https://lovable.dev).
+Production-oriented course sales site and lead CRM for the Professional Nail Artist & Entrepreneur Program.
 
-## Build with Lovable
+## Local development
+Install dependencies with `bun install`, configure the variables listed in `.env.example`, apply the committed database migration, then run `bun run dev`.
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+## Main surfaces
+- `/` — public sales and application page
+- `/admin` — protected lead CRM
+- `/api/health` — health check
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+See `docs/API.md`, `docs/DEPLOYMENT.md`, and `docs/INTEGRATIONS.md` for operations, API, administrator, tracking, WhatsApp, SuperProfile and backup guidance. No integration that requires private credentials is enabled by default.
