@@ -10,3 +10,4 @@
 - [x] Add SEO metadata, schema, sitemap, and robots configuration
 - [x] Add project documentation and focused tests
 - [x] Verify desktop, 390px, and 360px experiences plus core APIs
+- [x] Apply the supplied landing-page corrections and Aveda Education branding

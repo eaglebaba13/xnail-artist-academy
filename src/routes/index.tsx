@@ -10,12 +10,15 @@ import trainingImage from "@/assets/nail-training.jpg";
 import toolsImage from "@/assets/nail-tools.jpg";
 import xNailLogo from "@/assets/x-nail.png.asset.json";
 import mmaLogo from "@/assets/makemeartist-logo.png.asset.json";
+import avedaLogo from "@/assets/aveda-education.png.asset.json";
 
 const nailTopics = ["Nail foundations", "Nail anatomy", "Hygiene", "Sanitation", "Tools & products", "Manicure", "Nail preparation", "Gel", "Acrylic", "Extensions", "Nail art", "E-file", "Refill", "Repair", "Removal", "Maintenance", "Practical / model work"];
 const businessTopics = ["Pricing", "Costing", "Client management", "Branding", "Salon operations", "Sales", "Profitability", "Business planning", "Growth"];
 const digitalTopics = ["Instagram", "Content strategy", "Reels", "WhatsApp Business", "Online bookings", "Customer communication", "Lead generation", "Digital tools", "Digital operations"];
 const benefits = ["Professional training", "Practical learning", "Entrepreneurship training", "Digital business skills", "Portfolio development", "Certification*", "Business guidance*"];
 const careers = ["Professional Nail Artist", "Home-Based Studio", "Freelance Artist", "Own Nail Bar", "Salon Career"];
+const programHighlights = ["Comprehensive Basic-to-Advanced Curriculum", "Professional Nail Artist Training", "Practical & Live Model Training", "Professional Nail Kit", "Industry-Oriented Certification", "Internship Opportunity", "Placement Assistance", "Business & Entrepreneurship Training", "Instagram & Reels Training", "Salon & Freelance Career Guidance"];
+const pictorialImages = [heroImage, trainingImage, toolsImage];
 const faqs = [
   ["Is this suitable for beginners?", "The program begins with nail foundations and progresses through professional techniques, practical work, business and digital operations."],
   ["What is included in ₹60,000?", "The complete 50-day, 200-hour program covers professional nail training, practical learning, entrepreneurship, digital business skills and portfolio development."],
@@ -54,15 +57,22 @@ function LandingPage() {
         { "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
       ],
     }).replace(/</g, "\\u003c") }} />
-    <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-5 py-5 md:px-10">
-      <div className="flex items-center gap-4"><img src={mmaLogo.url} alt="MakeMeArtist" className="h-7 w-auto md:h-9" /><span className="h-6 w-px bg-foreground/20"/><img src={xNailLogo.url} alt="XNAIL Bar" className="h-10 w-auto md:h-12" /></div>
+    <header className="absolute inset-x-0 top-0 z-20 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-border/70 bg-background/95 px-4 py-3 shadow-sm backdrop-blur md:px-10">
+      <div className="flex min-w-0 items-center gap-3 md:gap-5">
+        <img src={avedaLogo.url} alt="Aveda Education" className="h-12 w-auto max-w-[7.5rem] object-contain md:h-16 md:max-w-[10rem]" />
+        <span className="h-10 w-px shrink-0 bg-border"/>
+        <img src={mmaLogo.url} alt="MakeMeArtist" className="h-7 w-auto max-w-[7rem] object-contain md:h-9 md:max-w-[10rem]" />
+        <span className="hidden h-10 w-px shrink-0 bg-border sm:block"/>
+        <div className="hidden shrink-0 sm:block"><span className="mb-0.5 block text-[9px] font-bold uppercase tracking-label text-muted-foreground">Industry partner</span><img src={xNailLogo.url} alt="XNAIL Bar, industry partner" className="h-8 w-auto md:h-10" /></div>
+      </div>
       <Button variant="dark" onClick={scrollToForm} className="hidden sm:inline-flex">Apply now <ArrowRight size={16}/></Button>
+      <div className="col-span-2 flex items-center justify-center gap-2 border-t border-border/60 pt-2 sm:hidden"><span className="text-[9px] font-bold uppercase tracking-label text-muted-foreground">Industry partner</span><img src={xNailLogo.url} alt="XNAIL Bar, industry partner" className="h-7 w-auto" /></div>
     </header>
 
     <section className="relative min-h-[92svh] bg-ink text-paper">
       <img src={heroImage} alt="Professional nail artist applying a manicure" width={1200} height={1504} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-center" />
       <div className="absolute inset-0 bg-hero-overlay"/>
-      <div className="relative mx-auto flex min-h-[92svh] max-w-7xl items-end px-5 pb-12 pt-28 md:px-10 md:pb-16">
+      <div className="relative mx-auto flex min-h-[92svh] max-w-7xl items-end px-5 pb-12 pt-40 md:px-10 md:pb-16 md:pt-32">
         <div className="max-w-4xl">
           <p className="mb-5 flex items-center gap-2 text-xs font-bold uppercase text-accent tracking-label"><Sparkles size={15}/> Professional Nail Artist & Entrepreneur Program</p>
           <h1 className="font-display text-[clamp(3.3rem,9vw,8.8rem)] leading-[.82] uppercase">Become a<br/>Professional<br/><em className="text-accent not-italic">Nail Artist.</em></h1>
@@ -79,8 +89,13 @@ function LandingPage() {
       <div className="mt-16 grid grid-cols-3 border-y border-paper/20 py-7 text-center font-bold uppercase tracking-label"><span>Skill</span><span>Business</span><span>Digital</span></div>
     </div></section>
 
+    <section className="grid border-b border-border lg:grid-cols-[1.05fr_.95fr]">
+      <div className="px-5 py-20 md:px-10 md:py-28 lg:px-[max(2.5rem,calc((100vw-80rem)/2))]"><p className="section-kicker">The course</p><h2 className="mt-4 max-w-3xl font-display text-5xl uppercase leading-[.92] md:text-7xl">Professional Nail Artist & Entrepreneur Program</h2><p className="mt-6 text-xl font-bold text-primary">Aveda Certificate in Basic to Advanced Program (ACBAP)</p><div className="mt-7 grid gap-2 border-y border-border py-5 text-sm font-bold uppercase tracking-label sm:grid-cols-3"><span>50 Days</span><span>200 Hours</span><span>Certificate Program</span></div><div className="mt-7 flex flex-wrap items-end gap-x-8 gap-y-3"><div><span className="block text-xs font-bold uppercase tracking-label text-muted-foreground">Program fee</span><strong className="font-display text-5xl">₹60,000</strong></div><p className="max-w-xl text-sm font-bold leading-6">Kit • Registration • Training • Certification • Placement Assistance</p></div><p className="mt-8 max-w-2xl leading-7 text-muted-foreground">A comprehensive Basic-to-Advanced Nail Education Program designed for aspiring nail artists, salon professionals, freelancers and future beauty entrepreneurs. From nail anatomy and hygiene to advanced extensions, creative nail art, client management, digital marketing and business development — learn, practice and build your professional path.</p><details className="group mt-7 border-y border-border"><summary className="flex cursor-pointer list-none items-center justify-between py-5 font-bold">View full program <ChevronDown className="transition-transform group-open:rotate-180" size={18}/></summary><div className="grid gap-x-6 gap-y-3 border-t border-border py-6 sm:grid-cols-2">{programHighlights.map((item)=><div key={item} className="flex items-start gap-2 text-sm"><Check className="mt-0.5 shrink-0 text-primary" size={16}/><span>{item}</span></div>)}</div></details></div>
+      <img src={trainingImage} loading="lazy" width={1408} height={912} alt="Aveda professional nail artist certificate program training" className="h-full min-h-[32rem] w-full object-cover"/>
+    </section>
+
     <section className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl">
-      <p className="section-kicker">Transformation</p><div className="mt-8 grid gap-3 md:grid-cols-5">{["Passion","Professional Skill","Business","Digital Presence","Opportunity"].map((item,i)=><div key={item} className="flex items-center gap-3 md:block"><div className="flex aspect-[4/3] flex-1 items-end border border-border bg-card p-5 font-display text-2xl uppercase md:aspect-square md:text-3xl"><span><b className="block text-sm text-primary">0{i+1}</b>{item}</span></div>{i<4&&<ArrowDown className="shrink-0 text-primary md:mx-auto md:mt-3"/>}</div>)}</div>
+      <p className="section-kicker">Transformation</p><div className="mt-8 grid gap-3 md:grid-cols-5">{["Passion","Professional Skill","Business","Digital Presence","Opportunity"].map((item,i)=><div key={item} className="flex items-center gap-3 md:block"><div className="relative flex aspect-[4/3] flex-1 items-end overflow-hidden bg-ink p-5 font-display text-2xl uppercase text-paper md:aspect-square md:text-3xl"><img src={pictorialImages[i%pictorialImages.length]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-55"/><span className="absolute inset-0 bg-hero-overlay"/><span className="relative"><b className="block text-sm text-accent">0{i+1}</b>{item}</span></div>{i<4&&<ArrowDown className="shrink-0 text-primary md:mx-auto md:mt-3"/>}</div>)}</div>
     </div></section>
 
     <section className="border-y border-border bg-soft px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl">
@@ -93,11 +108,11 @@ function LandingPage() {
 
     <section className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[.8fr_1.2fr] md:items-center"><div><p className="section-kicker">2 days</p><h2 className="section-title">Digital marketing<br/>& operations</h2><p className="mt-5 max-w-md text-muted-foreground">Build an online presence designed to help you attract and communicate with customers.</p></div><TopicGrid items={digitalTopics}/></div></section>
 
-    <section className="bg-soft px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><p className="section-kicker">What you get</p><h2 className="section-title">One course.<br/>A complete journey.</h2><div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4">{benefits.map((item,i)=><div key={item} className="min-h-44 border border-border bg-background p-6 -mt-px -ml-px"><span className="text-sm text-primary">0{i+1}</span><h3 className="mt-12 font-display text-2xl uppercase">{item}</h3></div>)}</div><p className="mt-6 text-xs text-muted-foreground">*Final certification and commercial support terms are confirmed during counselling.</p></div></section>
+    <section className="bg-soft px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><p className="section-kicker">What you get</p><h2 className="section-title">One course.<br/>A complete journey.</h2><div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{benefits.map((item,i)=><div key={item} className="relative flex min-h-64 items-end overflow-hidden bg-ink p-6 text-paper"><img src={pictorialImages[i%pictorialImages.length]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-45"/><span className="absolute inset-0 bg-hero-overlay"/><div className="relative"><span className="text-sm text-accent">0{i+1}</span><h3 className="mt-3 font-display text-2xl uppercase">{item}</h3></div></div>)}</div><p className="mt-6 text-xs text-muted-foreground">*Final certification and commercial support terms are confirmed during counselling.</p></div></section>
 
-    <section className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><p className="section-kicker">Career paths</p><h2 className="section-title">Where can your<br/>skill take you?</h2><div className="mt-12 flex snap-x gap-4 overflow-x-auto pb-5">{careers.map((item,i)=><article key={item} className="flex aspect-[3/4] min-w-[75vw] snap-center flex-col justify-between bg-ink p-6 text-paper sm:min-w-72"><span className="text-primary-foreground/50">0{i+1}</span><h3 className="font-display text-3xl uppercase">{item}</h3></article>)}</div></div></section>
+    <section className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><p className="section-kicker">Career paths</p><h2 className="section-title">Where can your<br/>skill take you?</h2><div className="mt-12 flex snap-x gap-4 overflow-x-auto pb-5">{careers.map((item,i)=><article key={item} className="relative flex aspect-[3/4] min-w-[75vw] snap-center flex-col justify-between overflow-hidden bg-ink p-6 text-paper sm:min-w-72"><img src={pictorialImages[(i+1)%pictorialImages.length]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-45"/><span className="absolute inset-0 bg-hero-overlay"/><span className="relative text-paper/60">0{i+1}</span><h3 className="relative font-display text-3xl uppercase">{item}</h3></article>)}</div></div></section>
 
-    <section className="bg-primary px-5 py-24 text-primary-foreground md:px-10 md:py-32"><div className="mx-auto max-w-5xl text-center"><p className="section-kicker text-primary-foreground/70">The investment</p><h2 className="font-display text-5xl uppercase leading-none md:text-8xl">You’re not just buying a course.</h2><p className="mt-8 text-xl md:text-3xl">You’re investing in skill + business.</p><p className="my-8 font-display text-6xl md:text-8xl">{COURSE_CONFIG.priceLabel}</p><Button variant="dark" size="lg" onClick={scrollToForm}>Start your journey <ArrowRight size={18}/></Button></div></section>
+    <section className="bg-primary px-5 py-24 text-primary-foreground md:px-10 md:py-32"><div className="mx-auto max-w-5xl text-center"><p className="section-kicker text-primary-foreground/70">The investment</p><h2 className="font-display text-5xl uppercase leading-none md:text-8xl">You’re not just buying a course.</h2><p className="mt-8 text-xl md:text-3xl">You’re building your leverage. You’re purchasing your independence.</p><p className="my-8 font-display text-6xl md:text-8xl">{COURSE_CONFIG.priceLabel}</p><Button variant="dark" size="lg" onClick={scrollToForm}>Start your journey <ArrowRight size={18}/></Button></div></section>
 
     <section className="border-b border-border px-5 py-24 md:px-10"><div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 md:items-center"><div><p className="section-kicker">XNAIL Bar opportunity</p><h2 className="section-title">Learn the skill.<br/>Explore the path.</h2></div><p className="text-xl leading-relaxed text-muted-foreground">{COURSE_CONFIG.opportunity}</p></div></section>
 
