@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MakeMeArtist × XNAIL" },
-      { name: "description", content: "Professional Nail Artist & Entrepreneur Program." },
+      { title: "Professional Nail Artist & Entrepreneur Program | ACBAP" },
+      { name: "description", content: "A 50-day, 200-hour Basic-to-Advanced nail education program with professional training, practical work, certification and career preparation." },
       { name: "author", content: "MakeMeArtist × XNAIL Bar" },
-      { property: "og:title", content: "MakeMeArtist × XNAIL" },
-      { property: "og:description", content: "Professional Nail Artist & Entrepreneur Program." },
+      { property: "og:title", content: "Professional Nail Artist & Entrepreneur Program | ACBAP" },
+      { property: "og:description", content: "A 50-day, 200-hour Basic-to-Advanced nail education program with professional training, practical work, certification and career preparation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       
