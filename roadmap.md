@@ -11,6 +11,6 @@
 - [x] Add project documentation and focused tests
 - [x] Verify desktop, 390px, and 360px experiences plus core APIs
 - [x] Apply the supplied landing-page corrections and Aveda Education branding
-- [ ] Overhaul the public landing page from the authoritative ACBAP document
-- [ ] Replace repeated photography with a one-use image mapping
-- [ ] Verify all 49 curriculum items, claims, CTAs, responsive layouts, and lead flow
+- [x] Overhaul the public landing page from the authoritative ACBAP document
+- [x] Replace repeated photography with a one-use image mapping
+- [x] Verify all 49 curriculum items, claims, CTAs, responsive layouts, and lead flow
