@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import { ArrowRight, Award, BookOpen, BriefcaseBusiness, Camera, Check, ChevronDown, Menu, MessageCircle, Phone, Sparkles, X } from "lucide-react";
+import { ArrowRight, Award, BookOpen, BriefcaseBusiness, Camera, Check, ChevronDown, Menu, MessageCircle, Phone, Sparkles, X, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CAREERS, CURRICULUM, WHAT_YOU_GET } from "@/lib/course-content";
 import { COURSE_CONFIG } from "@/lib/course-config";
@@ -26,6 +26,7 @@ const trainingHighlights = ["Nail foundations", "Nail anatomy", "Hygiene", "Sani
 const certificationItems = ["Industry-oriented certification", "Final theory examination", "Final practical assessment", "Practical training", "Portfolio development"];
 const placementItems = ["Salon interview opportunities", "Partner salon referrals", "Freelance career guidance", "Portfolio development", "Interview preparation", "Career counselling"];
 const investmentItems = ["Professional Training", "200 Hours of Education", "50-Day Program", "Professional Nail Kit", "Registration", "Practical Training", "Live Model Practice", "Internship Opportunity", "Final Assessment", "Certification", "Placement Assistance"];
+const benefitIcons: LucideIcon[] = [BookOpen, Sparkles, BriefcaseBusiness, Camera, Award];
 const faqs = [
   ["Is this program suitable for beginners?", "Yes. The curriculum progresses from nail science and professional hygiene through advanced techniques, practical training and career preparation."],
   ["What does the ₹60,000 fee include?", "It includes the 50-day, 200-hour program, professional training, a professional nail kit, registration, practical training, live model practice, internship opportunity, final assessment, certification and placement assistance."],
@@ -97,7 +98,7 @@ function LandingPage() {
 
     <section className="px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><p className="section-kicker">The experience</p><h2 className="section-title">One course.<br/>A complete journey.</h2><div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{journey.map((title,i)=><article key={title} className="group relative min-h-[25rem] overflow-hidden bg-ink text-paper"><img src={COURSE_IMAGES.journey[i]} alt={`${title} within the ACBAP program`} loading="lazy" width={912} height={1104} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/><span className="absolute inset-0 bg-card-overlay"/><div className="absolute inset-x-0 bottom-0 p-6"><span className="text-sm font-bold text-accent">0{i+1}</span><h3 className="mt-2 font-display text-3xl uppercase leading-none">{title}</h3></div></article>)}</div></div></section>
 
-    <section className="border-y border-border bg-soft px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="section-kicker">What you get</p><h2 className="section-title">Built for<br/>professional<br/>practice.</h2></div><div className="grid sm:grid-cols-2">{WHAT_YOU_GET.map((item,i)=>{const Icon=[BookOpen,Sparkles,BriefcaseBusiness,Camera,Award][i%5];return <div key={item} className="flex min-h-32 gap-4 border-b border-border py-6 sm:border-l sm:px-6"><Icon className="shrink-0 text-primary" size={22}/><div><span className="text-xs font-bold text-muted-foreground">{String(i+1).padStart(2,"0")}</span><h3 className="mt-2 text-base font-extrabold uppercase">{item}</h3></div></div>})}</div></div></div></section>
+    <section className="border-y border-border bg-soft px-5 py-24 md:px-10 md:py-32"><div className="mx-auto max-w-7xl"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="section-kicker">What you get</p><h2 className="section-title">Built for<br/>professional<br/>practice.</h2></div><div className="grid sm:grid-cols-2">{WHAT_YOU_GET.map((item,i)=>{const Icon=benefitIcons[i%benefitIcons.length] ?? BookOpen;return <div key={item} className="flex min-h-32 gap-4 border-b border-border py-6 sm:border-l sm:px-6"><Icon className="shrink-0 text-primary" size={22}/><div><span className="text-xs font-bold text-muted-foreground">{String(i+1).padStart(2,"0")}</span><h3 className="mt-2 text-base font-extrabold uppercase">{item}</h3></div></div>})}</div></div></div></section>
 
     <Curriculum />
 
